@@ -1,19 +1,17 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, send_file
 from audio_processing import process_audio
 from midi_generator import generate_midi
 
 app = Flask(__name__)
 
-@app.route('/convert', methods=['POST'])
-def convert_melody():
+@app.route('/harmonize', methods=['POST'])
+def harmonize():
     if 'audio' not in request.files:
-        return jsonify({"error": "No audio file provided"}), 400
-    
+        return {"error": "No file uploaded"}, 400
     audio_file = request.files['audio']
-    processed_data = process_audio(audio_file)
-    midi_file = generate_midi(processed_data)
-    
-    return jsonify({"message": "MIDI generated successfully", "midi": midi_file})
+    pitch_data = process_audio(audio_file)
+    midi_file = generate_midi(pitch_data)
+    return send_file(midi_file, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)

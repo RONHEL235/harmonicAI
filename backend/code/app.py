@@ -1,31 +1,28 @@
 from flask import Flask, request, send_file
+from pydub import AudioSegment
 import os
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'uploads/'
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
-        return 'No file part', 400
+        return 'No file part'
     file = request.files['file']
     if file.filename == '':
-        return 'No selected file', 400
+        return 'No selected file'
     
-    file_path = os.path.join(UPLOAD_FOLDER, file.filename)
+    # Save file temporarily
+    file_path = os.path.join('uploads', file.filename)
     file.save(file_path)
 
-    # Process file here (e.g., convert to MIDI)
-    processed_midi = process_to_midi(file_path)
-    
-    return send_file(processed_midi, as_attachment=True)
+    # Process the file with pydub (example: convert to mp3)
+    audio = AudioSegment.from_file(file_path)
+    output_path = file_path.replace('.wav', '.mp3')  # Example for WAV to MP3 conversion
+    audio.export(output_path, format='mp3')
 
-def process_to_midi(file_path):
-    # Your logic to convert to MIDI goes here
-    processed_midi_path = 'path_to_generated_midi.mid'
-    return processed_midi_path
+    # Send the processed file back
+    return send_file(output_path, as_attachment=True)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True)

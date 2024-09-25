@@ -1,86 +1,30 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #2b2b2b;
-  color: white;
-}
-
 .App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  flex-direction: column;
-}
-
-.container {
   text-align: center;
 }
 
-h1 {
-  margin-bottom: 30px;
-  font-size: 2.5rem;
-}
-
-.instrument-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.instrument-buttons button {
-  background-color: #444;
+.App-header {
+  background-color: #282c34;
+  padding: 20px;
   color: white;
-  padding: 10px 20px;
-  margin: 5px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #61dafb;
   border: none;
   cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
 }
 
-.instrument-buttons button:hover {
-  background-color: #555;
+button:hover {
+  background-color: #21a1f1;
 }
 
-.harmonify-btn {
-  background-color: #777;
-  padding: 15px 30px;
-  font-size: 18px;
-  margin-top: 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
+input {
+  margin-top: 10px;
 }
 
-.harmonify-btn:hover {
-  background-color: #888;
-}
-
-footer {
-  margin-top: 50px;
-  font-size: 12px;
-}
-
-.logout-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: #444;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.logout-btn:hover {
-  background-color: #555;
-}
-
-footer {
-  margin-top: 50px;
-  font-size: 12px;
+p {
+  margin-top: 10px;
+  color: green;
 }

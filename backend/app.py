@@ -1,29 +1,46 @@
 from flask import Flask, request, send_file
 from flask_cors import CORS
+import os
+from pydub import AudioSegment
 
 app = Flask(__name__)
-CORS(app)
 
-# Figure out how to fix this 
+# Allow requests only from your frontend (localhost:3001)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3001"}})
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
-        return 'No file part'
+        return 'No file part', 400
+
     file = request.files['file']
     if file.filename == '':
-        return 'No selected file'
-    
+        return 'No selected file', 400
+
+    # Create uploads directory if it doesn't exist
+    if not os.path.exists('uploads'):
+        os.makedirs('uploads')
+
     # Save file temporarily
     file_path = os.path.join('uploads', file.filename)
     file.save(file_path)
 
-    # Process the file with pydub (example: convert to mp3)
-    audio = AudioSegment.from_file(file_path)
-    output_path = file_path.replace('.wav', '.mp3')  # Example for WAV to MP3 conversion
-    audio.export(output_path, format='mp3')
+    try:
+        # Process the file with pydub (example: convert to mp3)
+        audio = AudioSegment.from_file(file_path)
+        output_path = file_path.replace('.wav', '.mp3')  # Example for WAV to MP3 conversion
+        audio.export(output_path, format='mp3')
 
-    # Send the processed file back
-    return send_file(output_path, as_attachment=True)
+        # Send the processed file back
+        return send_file(output_path, as_attachment=True)
+    except Exception as e:
+        return str(e), 500
+    finally:
+        # Clean up temporary files
+        if os.path.exists(file_path):
+            os.remove(file_path)
+        if os.path.exists(output_path):
+            os.remove(output_path)
 
 if __name__ == '__main__':
     app.run(debug=True)

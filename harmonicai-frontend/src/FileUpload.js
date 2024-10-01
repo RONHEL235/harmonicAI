@@ -29,8 +29,8 @@ const FileUpload = () => {
       });
 
       if (response.ok) {
-        const data = await response.blob();  // Assuming file returned is binary
-        const downloadUrl = URL.createObjectURL(data);
+        const blob = await response.blob();  // Get the file as binary data
+        const downloadUrl = URL.createObjectURL(blob);
 
         // Create a temporary link to download the file
         const a = document.createElement('a');

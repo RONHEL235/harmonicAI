@@ -4,7 +4,7 @@ const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
 
-  // Function to handle file selection
+  // Function to handle file selection inside the application.
   const onFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };

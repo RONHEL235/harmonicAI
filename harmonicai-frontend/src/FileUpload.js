@@ -11,6 +11,7 @@ const FileUpload = () => {
 
   // Function to handle file upload
   const onFileUpload = async () => {
+    // If no file is selected, update status message and return
     if (!selectedFile) {
       setUploadStatus('Please select a file first.');
       return;

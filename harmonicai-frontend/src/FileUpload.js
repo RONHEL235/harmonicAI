@@ -50,6 +50,7 @@ const FileUpload = () => {
     }
   };
 
+  // Render the file upload UI
   return (
     <div>
       <h2>File Upload to Flask Backend</h2>

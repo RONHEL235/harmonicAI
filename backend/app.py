@@ -16,6 +16,7 @@ ALLOWED_EXTENSIONS = {'wav', 'mp3'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Route to handle file upload
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:

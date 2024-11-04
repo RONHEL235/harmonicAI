@@ -12,6 +12,7 @@ CORS(app, resources={r"/*": {"origins": "http://localhost:3001"}})
 # Define allowed file extensions
 ALLOWED_EXTENSIONS = {'wav', 'mp3'}
 
+# Function to check if the file has an allowed extension
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 

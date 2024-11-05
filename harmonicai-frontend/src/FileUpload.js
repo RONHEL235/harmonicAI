@@ -49,6 +49,7 @@ const FileUpload = () => {
         setUploadStatus('File upload failed.');
       }
     } catch (error) {
+      // Handle any errors encountered during the upload
       setUploadStatus(`Error: ${error.message}`);
     }
   };

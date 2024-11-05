@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 const FileUpload = () => {
+  // State to hold the selected file and upload status messages
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
 

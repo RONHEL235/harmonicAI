@@ -17,7 +17,8 @@ const FileUpload = () => {
       setUploadStatus('Please select a file first.');
       return;
     }
-
+    
+    // Initialize form data and append the selected file to it
     const formData = new FormData();
     formData.append('file', selectedFile);
 

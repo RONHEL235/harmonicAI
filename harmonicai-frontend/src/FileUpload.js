@@ -17,12 +17,13 @@ const FileUpload = () => {
       setUploadStatus('Please select a file first.');
       return;
     }
-    
+
     // Initialize form data and append the selected file to it
     const formData = new FormData();
     formData.append('file', selectedFile);
 
     try {
+      // Make a POST request to the Flask backend to upload the file
       const response = await fetch('http://127.0.0.1:5000/upload', {
         method: 'POST',
         body: formData,

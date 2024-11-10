@@ -31,7 +31,7 @@ const FileUpload = () => {
           'Accept': 'application/json',
         },
       });
-
+      //If the response is okay get the file as binary data 
       if (response.ok) {
         const blob = await response.blob();  // Get the file as binary data
         const downloadUrl = URL.createObjectURL(blob);
